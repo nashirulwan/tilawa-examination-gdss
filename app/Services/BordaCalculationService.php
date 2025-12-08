@@ -19,8 +19,8 @@ class BordaCalculationService
         // 1. Get SMART Results
         $smartResults = $this->smartService->calculate($period);
 
-        // 2. Initialize Borda Points
-        $participants = $period->participants;
+        // 2. Initialize Borda Points (only active participants)
+        $participants = $period->participants()->where('is_active', true)->get();
         $bordaScores = [];
         foreach ($participants as $p) {
             $bordaScores[$p->id] = [
@@ -30,34 +30,26 @@ class BordaCalculationService
             ];
         }
 
-        $N = $participants->count(); // Total participants, effectively the max points (Rank 1 gets N points? or 5 points fixed? Journal says n=5).
-        // Journal: "Poin Borda didasarkan pada urutan (n=5, n-1, n-2, ...)" where n is number of participants? Yes "P1 (Peringkat 1) 100 5 500". 100 is SMART, 5 is Borda points. 500 is total points?
-        // Wait. A1: P1 SMART=100. Poin=5. Total=500.
-        // A1: P5 SMART=72. Poin=4. Total=288.
-        // The journal aggregates "Total Points (SMART * Borda)".
-        // And Final Ranking is based on "Total Points (Borda)".
-        // So the algorithm is: Sum(SMART_Score * RankWeight) across all appraisers?
-        // Let's check Final Result.
-        // P1: A1(500) + A2(280) = 780.
-        // A2 P1: SMART=70.5. Rank 2. Points 4. Total=282 (70.5 * 4 = 282).
-        // Journal says 280. 282 vs 280. Difference is 2 points. Maybe 70.0? Normalized weights rounding?
-        // I will implement Sum(SMART * RankWeight).
+        $N = $participants->count(); // Total participants = max Borda points for Rank 1
         
         foreach ($smartResults as $appraiserId => $data) {
             foreach ($data['participants'] as $pid => $pData) {
-                // Rank Weight: N - Rank + 1. (Rank 1 -> N, Rank N -> 1).
-                // Example N=5. Rank 1: 5-1+1 = 5. Rank 5: 5-5+1 = 1.
-                $rankWeight = $N - $pData['rank'] + 1;
+                // Skip if this participant is not in our active list
+                if (!isset($bordaScores[$pid])) {
+                    continue;
+                }
                 
-                // Calculate Points
-                $points = $pData['smart_score'] * $rankWeight;
+                // Standard Borda: Rank 1 gets N points, Rank 2 gets N-1, etc.
+                // Rank 1 → 5 pts, Rank 2 → 4 pts, ..., Rank 5 → 1 pt
+                $bordaPoints = $N - $pData['rank'] + 1;
                 
-                $bordaScores[$pid]['total_borda_score'] += $points;
+                // Just SUM the Borda points (NOT multiply by SMART score!)
+                $bordaScores[$pid]['total_borda_score'] += $bordaPoints;
                 $bordaScores[$pid]['appraiser_details'][$appraiserId] = [
                     'smart_score' => $pData['smart_score'],
+                    'smart_details' => $pData['details'],
                     'rank' => $pData['rank'],
-                    'borda_weight' => $rankWeight,
-                    'points' => $points
+                    'borda_points' => $bordaPoints
                 ];
             }
         }

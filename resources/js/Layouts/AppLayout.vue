@@ -10,12 +10,12 @@ const user = computed(() => page.props.auth.user);
     <div class="layout-container">
         <aside v-if="user" class="sidebar glass">
             <div style="margin-bottom: 2rem;">
-                <h1 style="font-size: 1.5rem; font-weight: 700; background: linear-gradient(to right, #4f46e5, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">MTQ System</h1>
+                <Link href="/dashboard" style="text-decoration: none; display: block;">
+                    <h1 style="font-size: 1.5rem; font-weight: 700; background: linear-gradient(to right, #4f46e5, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0;">MTQ System</h1>
+                </Link>
             </div>
             <nav>
-                <Link href="/dashboard" class="nav-link" :class="{ 'active': $page.url === '/dashboard' }">
-                    Dashboard
-                </Link>
+                <!-- Dashboard link removed as header is now clickable -->
                 
                 <template v-if="user.role === 'committee'">
                     <Link href="/users" class="nav-link" :class="{ 'active': $page.url.startsWith('/users') }">Users</Link>
@@ -26,10 +26,9 @@ const user = computed(() => page.props.auth.user);
                 
                 <template v-else>
                     <Link href="/assessments" class="nav-link" :class="{ 'active': $page.url.startsWith('/assessments') }">Rate Participants</Link>
-                    <a href="#" class="nav-link">My Profile</a>
                 </template>
                 
-                <Link href="/logout" method="post" as="button" class="nav-link" style="margin-top: auto; background:none; border:none; width:100%; cursor:pointer; text-align: left;">
+                <Link href="/logout" method="post" as="button" class="nav-link" style="margin-top: auto; background: transparent; border: none; width: 100%; cursor: pointer; text-align: left; font-family: inherit; font-size: inherit;">
                     Logout
                 </Link>
             </nav>

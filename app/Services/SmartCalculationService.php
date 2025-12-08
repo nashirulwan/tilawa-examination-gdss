@@ -12,6 +12,14 @@ class SmartCalculationService
 {
     public function calculate(Period $period)
     {
+        // Only get active participants
+        $participants = $period->participants()->where('is_active', true)->get();
+        // Find appraisers who have assessed ANY participant in this period
+        // Or simpler: Get all users with role 'appraiser' (assuming only assigned ones matter)
+        // But better to rely on actual assessments to handle "who judged whom" or "all judged all"
+        // Journal implies rigid set of appraisers.
+        $appraisers = User::where('role', 'appraiser')->where('is_active', true)->get();
+
         // 1. Prepare Criteria and Normalization
         $criteria = Criteria::all();
         $totalWeight = $criteria->sum('weight');

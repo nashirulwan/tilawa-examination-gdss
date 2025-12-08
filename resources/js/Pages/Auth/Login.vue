@@ -14,7 +14,7 @@ const submit = () => {
 <template>
     <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
         <div class="glass" style="padding: 3rem; width: 100%; max-width: 400px; text-align: center;">
-            <h2 style="margin-bottom: 2rem;">Welcome Back</h2>
+            <h2 style="margin-bottom: 2rem;">Welcome to MTQ System</h2>
             
             <form @submit.prevent="submit">
                 <div style="margin-bottom: 1rem; text-align: left;">

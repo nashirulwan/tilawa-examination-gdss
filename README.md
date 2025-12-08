@@ -1,59 +1,99 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# GDSS for Quran Recitation Competition (MTQ)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Overview
 
-## About Laravel
+This web-based Group Decision Support System (GDSS) is designed to streamline and objectify the evaluation process involved in Quran Recitation Competitions (Musabaqah Tilawatil Quran). By integrating the **SMART** (Simple Multi-Attribute Rating Technique) method for individual assessment and the **Borda Count** method for group consensus, the system ensures fair, transparent, and mathematically rigorous rankings.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Core Features & Processes
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The system facilitates the entire competition lifecycle through the following key processes:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1.  **Administrative Management (Committee)**
+    *   **User Management**: create and manage accounts for committee members and appraisers (judges).
+    *   **Participant Management**: Register participants, assign them to periods/years, and manage their status (Active/Inactive) and departments.
+    *   **Criteria Configuration**: Define and weight assessment criteria (e.g., Fashah, Tajweed, Voice, Song) to standards.
 
-## Learning Laravel
+2.  **Assessment Phase (Appraisers)**
+    *   Appraisers log in to a dedicated interface to evaluate participants.
+    *   Scoring is performed against the predefined criteria.
+    *   The system automatically calculates the **SMART score** (Utility * Weight) for each partial assessment.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+3.  **Decision Support & Reporting**
+    *   **SMART Calculation**: Converts raw scores into normalized utility values and weighted scores for individual rankings.
+    *   **Borda Consensus**: Aggregates individual rankings from all appraisers into a single group consensus using the Borda Count method (Rank 1 = N points, Rank N = 1 point).
+    *   **Analytical Dashboards**: Visualizes participant demographics and provides real-time system status.
+    *   **Detailed Reports**: Offers transparent breakdowns of calculations, showing raw values, utility conversions, and final Borda points.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## System Requirements
 
-## Laravel Sponsors
+*   Docker & Docker Compose
+*   Node.js & NPM (for frontend asset compilation)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Installation Guide
 
-### Premium Partners
+Follow these steps to deploy the application with a fully seeded database.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 1. Application Setup
 
-## Contributing
+Clone the repository and navigate to the project directory.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+# Copy the environment configuration
+cp .env.example .env
+```
 
-## Code of Conduct
+Ensure your `.env` file is configured for the Docker environment (default settings usually suffice for local development using the provided `docker-compose.yml`).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 2. Infrastructure Initialization
 
-## Security Vulnerabilities
+Start the containerized services (App, Web Server, Database).
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+docker-compose up -d --build
+```
 
-## License
+### 3. Dependency Installation
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Install backend (PHP/Composer) and frontend (Node/NPM) dependencies.
+
+```bash
+# Install PHP dependencies
+docker-compose exec app composer install
+
+# Install Node dependencies
+npm install
+```
+
+### 4. Database Configuration
+
+Generate the application key and initialize the database. This step includes running migrations and seeding the database with required reference data and sample users.
+
+```bash
+# Generate App Key
+docker-compose exec app php artisan key:generate
+
+# Migrate and Seed Database
+# This creates all tables and populates them with default admin/appraiser accounts and sample participants.
+docker-compose exec app php artisan migrate:fresh --seed
+```
+
+### 5. Frontend Compilation
+
+Start the Vite development server to compile and serve frontend assets.
+
+```bash
+npm run dev
+```
+
+### 6. Accessing the System
+
+The application is now accessible at: **http://localhost:8000**
+
+**Default Credentials:**
+
+*   **Committee (Admin)**
+    *   Email: `admin@example.com`
+    *   Password: `password`
+*   **Appraiser (Judge)**
+    *   Email: `appraiser@example.com`
+    *   Password: `password`

@@ -40,13 +40,23 @@ class AuthController extends Controller
     
     public function dashboard()
     {
+        // Get active period for context
+        $period = \App\Models\Period::where('year', 2021)->first();
+        
+        $demographics = \App\Models\Participant::select('department', \DB::raw('count(*) as total'))
+            ->where('is_active', true)
+            ->when($period, fn($q) => $q->where('period_id', $period->id))
+            ->groupBy('department')
+            ->get();
+
         return Inertia::render('Dashboard', [
-            // Dummy data for widgets, in real app query DB
             'stats' => [
-                'participants' => 5,
-                'appraisers' => 3,
+                'participants' => \App\Models\Participant::where('is_active', true)->count(),
+                'appraisers' => \App\Models\User::where('role', 'appraiser')->where('is_active', true)->count(),
                 'completion' => 100
-            ]
+            ],
+            'demographics' => $demographics,
+            'period' => $period
         ]);
     }
 }

@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from '../../Layouts/AppLayout.vue';
-import { useForm } from '@inertiajs/vue3';
+import { useForm, Link } from '@inertiajs/vue3';
 
 defineProps({
     periods: Array,
@@ -9,7 +9,9 @@ defineProps({
 const form = useForm({
     name: '',
     gender: 'male',
+    department: '',
     period_id: '',
+    is_active: true
 });
 
 const submit = () => {
@@ -20,12 +22,19 @@ const submit = () => {
 <template>
     <AppLayout>
         <div style="max-width: 600px; margin: 0 auto;">
-            <h2 style="margin-bottom: 2rem;">Add Participant</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h2 style="margin: 0;">Add Participant</h2>
+                <Link href="/participants" style="color: var(--text-muted); text-decoration: none;">← Back</Link>
+            </div>
             <div class="glass" style="padding: 2rem;">
                 <form @submit.prevent="submit">
                     <div>
                         <label>Name</label>
                         <input v-model="form.name" type="text" required>
+                    </div>
+                    <div>
+                        <label>Department</label>
+                        <input v-model="form.department" type="text" required>
                     </div>
                     <div>
                         <label>Gender</label>
@@ -37,8 +46,14 @@ const submit = () => {
                     <div>
                         <label>Period</label>
                         <select v-model="form.period_id" style="width: 100%; padding: 12px; margin-bottom: 1rem; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); color: white; border-radius: 8px;" required>
-                            <option v-for="period in periods" :key="period.id" :value="period.id">{{ period.name }}</option>
+                            <option v-for="period in periods" :key="period.id" :value="period.id">{{ period.year }}</option>
                         </select>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input v-model="form.is_active" type="checkbox" style="margin-right: 0.5rem; width: auto;">
+                            Active
+                        </label>
                     </div>
                     <button type="submit" class="btn-primary" :disabled="form.processing">Save Participant</button>
                 </form>

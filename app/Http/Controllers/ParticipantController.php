@@ -27,8 +27,9 @@ class ParticipantController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'gender' => 'required|in:male,female',
-            'student_id' => 'nullable',
+            'department' => 'required',
             'period_id' => 'required|exists:periods,id',
+            'is_active' => 'nullable|boolean',
         ]);
 
         Participant::create($validated);
@@ -45,10 +46,11 @@ class ParticipantController extends Controller
     public function update(Request $request, Participant $participant)
     {
         $validated = $request->validate([
-            'name' => 'required',
-            'gender' => 'required|in:male,female',
-            'student_id' => 'nullable',
-            'period_id' => 'required|exists:periods,id',
+            'name' => 'sometimes|required',
+            'gender' => 'sometimes|required|in:male,female',
+            'department' => 'sometimes|required',
+            'period_id' => 'sometimes|required|exists:periods,id',
+            'is_active' => 'sometimes|boolean',
         ]);
 
         $participant->update($validated);

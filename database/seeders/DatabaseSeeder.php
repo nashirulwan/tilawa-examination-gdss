@@ -54,13 +54,20 @@ class DatabaseSeeder extends Seeder
             ]);
 
             // 3. Participants
-            $participants = [
-                'P1' => Participant::create(['period_id' => $period->id, 'name' => 'Dewi Kartika', 'gender' => 'female']),
-                'P2' => Participant::create(['period_id' => $period->id, 'name' => 'Anggraeni', 'gender' => 'female']),
-                'P3' => Participant::create(['period_id' => $period->id, 'name' => 'Dedyka Syahputra', 'gender' => 'male']),
-                'P4' => Participant::create(['period_id' => $period->id, 'name' => 'Adam Syahputra', 'gender' => 'male']),
-                'P5' => Participant::create(['period_id' => $period->id, 'name' => 'Diana Asmarani Siregar', 'gender' => 'female']),
+            $departments = ['Computer Science', 'Information Systems', 'Information Technology', 'Software Engineering'];
+        
+            $participantData = [
+                ['name' => 'Dewi Kartika', 'gender' => 'female', 'student_id' => '1001', 'period_id' => $period->id, 'department' => 'Computer Science'],
+                ['name' => 'Anggraeni', 'gender' => 'female', 'student_id' => '1002', 'period_id' => $period->id, 'department' => 'Information Systems'],
+                ['name' => 'Dedyka Syahputra', 'gender' => 'male', 'student_id' => '1003', 'period_id' => $period->id, 'department' => 'Information Technology'],
+                ['name' => 'Adam Syahputra', 'gender' => 'male', 'student_id' => '1004', 'period_id' => $period->id, 'department' => 'Computer Science'],
+                ['name' => 'Diana Asmarani Siregar', 'gender' => 'female', 'student_id' => '1005', 'period_id' => $period->id, 'department' => 'Software Engineering'],
             ];
+
+            $participants = [];
+            foreach ($participantData as $index => $p) {
+                $participants['P' . ($index + 1)] = Participant::create($p);
+            }
 
             // 4. Criteria & Sub-Criteria
             $criteriaData = [

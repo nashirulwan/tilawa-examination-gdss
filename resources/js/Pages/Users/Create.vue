@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from '../../Layouts/AppLayout.vue';
-import { useForm } from '@inertiajs/vue3';
+import { useForm, Link } from '@inertiajs/vue3';
 
 const form = useForm({
     name: '',
@@ -17,7 +17,10 @@ const submit = () => {
 <template>
     <AppLayout>
         <div style="max-width: 600px; margin: 0 auto;">
-            <h2 style="margin-bottom: 2rem;">Create User</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h2 style="margin: 0;">Create User</h2>
+                <Link href="/users" style="color: var(--text-muted); text-decoration: none;">← Back</Link>
+            </div>
             <div class="glass" style="padding: 2rem;">
                 <form @submit.prevent="submit">
                     <div>
