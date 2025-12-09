@@ -27,6 +27,7 @@ class ParticipantController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'gender' => 'required|in:male,female',
+            'age' => 'nullable|integer|min:1|max:120',
             'department' => 'required',
             'period_id' => 'required|exists:periods,id',
             'is_active' => 'nullable|boolean',
@@ -48,6 +49,7 @@ class ParticipantController extends Controller
         $validated = $request->validate([
             'name' => 'sometimes|required',
             'gender' => 'sometimes|required|in:male,female',
+            'age' => 'sometimes|nullable|integer|min:1|max:120',
             'department' => 'sometimes|required',
             'period_id' => 'sometimes|required|exists:periods,id',
             'is_active' => 'sometimes|boolean',

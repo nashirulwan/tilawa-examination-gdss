@@ -10,6 +10,7 @@ const props = defineProps({
 const form = useForm({
     name: props.participant.name,
     gender: props.participant.gender,
+    age: props.participant.age,
     department: props.participant.department,
     period_id: props.participant.period_id,
     is_active: props.participant.is_active ?? true
@@ -32,6 +33,10 @@ const submit = () => {
                     <div>
                         <label>Name</label>
                         <input v-model="form.name" type="text" required>
+                    </div>
+                    <div>
+                        <label>Age</label>
+                        <input v-model="form.age" type="number" min="1" max="120">
                     </div>
                     <div>
                         <label>Department</label>

@@ -9,6 +9,7 @@ defineProps({
 const form = useForm({
     name: '',
     gender: 'male',
+    age: '',
     department: '',
     period_id: '',
     is_active: true
@@ -31,6 +32,10 @@ const submit = () => {
                     <div>
                         <label>Name</label>
                         <input v-model="form.name" type="text" required>
+                    </div>
+                    <div>
+                        <label>Age</label>
+                        <input v-model="form.age" type="number" min="1" max="120">
                     </div>
                     <div>
                         <label>Department</label>

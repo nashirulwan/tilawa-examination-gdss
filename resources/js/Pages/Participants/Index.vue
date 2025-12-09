@@ -29,6 +29,7 @@ const toggleActive = (id, currentStatus) => {
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Age</th>
                         <th>Department</th>
                         <th>Gender</th>
                         <th>Period</th>
@@ -39,6 +40,7 @@ const toggleActive = (id, currentStatus) => {
                 <tbody>
                     <tr v-for="p in participants" :key="p.id">
                         <td style="font-weight: 600;">{{ p.name }}</td>
+                        <td>{{ p.age || '-' }}</td>
                         <td>{{ p.department }}</td>
                         <td>{{ p.gender.charAt(0).toUpperCase() + p.gender.slice(1) }}</td>
                         <td>{{ p.period?.year }}</td>

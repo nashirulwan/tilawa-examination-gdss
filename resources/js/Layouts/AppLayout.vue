@@ -24,6 +24,11 @@ const user = computed(() => page.props.auth.user);
                     <Link href="/reports" class="nav-link" :class="{ 'active': $page.url.startsWith('/reports') }">Reports</Link>
                 </template>
                 
+                <template v-else-if="user.role === 'jury_chair'">
+                    <Link href="/jury-chair" class="nav-link" :class="{ 'active': $page.url.startsWith('/jury-chair') }">Final Decision</Link>
+                    <Link href="/reports" class="nav-link" :class="{ 'active': $page.url.startsWith('/reports') }">Reports</Link>
+                </template>
+                
                 <template v-else>
                     <Link href="/assessments" class="nav-link" :class="{ 'active': $page.url.startsWith('/assessments') }">Rate Participants</Link>
                 </template>

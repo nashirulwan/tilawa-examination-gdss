@@ -31,4 +31,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/assessments/{participant}/rate', [App\Http\Controllers\AssessmentController::class, 'create'])->name('assessments.rate');
     Route::post('/assessments/{participant}', [App\Http\Controllers\AssessmentController::class, 'store'])->name('assessments.store');
     Route::get('/my-profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+
+    // Jury Chair Routes
+    Route::get('/jury-chair', [App\Http\Controllers\JuryChairController::class, 'index'])->name('jury-chair.index');
+    Route::post('/jury-chair/calculate', [App\Http\Controllers\JuryChairController::class, 'calculate'])->name('jury-chair.calculate');
 });

@@ -9,7 +9,7 @@ class Participant extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'department', 'gender', 'student_id', 'period_id', 'is_active'];
+    protected $fillable = ['name', 'department', 'gender', 'age', 'period_id', 'is_active'];
 
     public function period()
     {

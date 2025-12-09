@@ -35,6 +35,7 @@ const submit = () => {
                         <label>Role</label>
                         <select v-model="form.role" style="width: 100%; padding: 12px; margin-bottom: 1rem; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); color: white; border-radius: 8px;">
                             <option value="appraiser">Appraiser</option>
+                            <option value="jury_chair">Jury Chair</option>
                             <option value="committee">Committee</option>
                         </select>
                     </div>

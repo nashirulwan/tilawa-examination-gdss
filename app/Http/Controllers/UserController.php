@@ -27,7 +27,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'role' => 'required|in:committee,appraiser',
+            'role' => 'required|in:committee,appraiser,jury_chair',
         ]);
 
         User::create([
@@ -50,7 +50,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'sometimes|required',
             'email' => 'sometimes|required|email|unique:users,email,' . $user->id,
-            'role' => 'sometimes|required|in:committee,appraiser',
+            'role' => 'sometimes|required|in:committee,appraiser,jury_chair',
             'is_active' => 'sometimes|boolean',
         ]);
 
