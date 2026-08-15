@@ -75,6 +75,7 @@ docker compose exec app php artisan key:generate
 # Migrate and Seed Database
 # This creates all tables and populates them with default admin/appraiser accounts and sample participants.
 docker compose exec app php artisan migrate:fresh --seed
+> Note: on first run, MySQL takes a few seconds to initialize. If you see a connection refused error, wait a moment and run the command again.
 ```
 
 ##### 5. Frontend Compilation
