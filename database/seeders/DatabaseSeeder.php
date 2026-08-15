@@ -46,6 +46,13 @@ class DatabaseSeeder extends Seeder
                 'role' => 'appraiser',
             ]);
 
+            $juryChair = User::create([
+                'name' => 'Jury Chair',
+                'email' => 'jury@mtq.com',
+                'password' => Hash::make('password'),
+                'role' => 'jury_chair',
+            ]);
+
             // 2. Period
             $period = Period::create([
                 'name' => 'Tahun 2021',
