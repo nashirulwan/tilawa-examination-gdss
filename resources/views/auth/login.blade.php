@@ -27,6 +27,7 @@
             <p>Demo Accounts:</p>
             <p>Admin: admin@mtq.com / password</p>
             <p>Appraiser: appraiser1@mtq.com / password</p>
+            <p>Jury Chair: jury@mtq.com / password</p>
         </div>
     </div>
 </div>
