@@ -1,10 +1,10 @@
-# GDSS for Quran Recitation Competition (MTQ)
+### GDSS for Quran Recitation Competition (MTQ)
 
-## Project Overview
+#### Project Overview
 
-This web-based Group Decision Support System (GDSS) is designed to streamline and objectify the evaluation process involved in Quran Recitation Competitions (Musabaqah Tilawatil Quran). By integrating the **SMART** (Simple Multi-Attribute Rating Technique) method for individual assessment and the **Borda Count** method for group consensus, the system ensures fair, transparent, and mathematically rigorous rankings.
+This web-based Group Decision Support System (GDSS) is designed to streamline and objectify the evaluation process involved in Quran Recitation Competitions (Musabaqah Tilawatil Quran). By integrating the **SMART** (Simple Multi-Attribute Rating Technique) method for individual assessment and the **Borda Count** method for group consensus, the system ensures fair, transparent, and mathematically rigorous rankings. Built for an information systems course.
 
-## Core Features & Processes
+#### Core Features & Processes
 
 The system facilitates the entire competition lifecycle through the following key processes:
 
@@ -24,16 +24,16 @@ The system facilitates the entire competition lifecycle through the following ke
     *   **Analytical Dashboards**: Visualizes participant demographics and provides real-time system status.
     *   **Detailed Reports**: Offers transparent breakdowns of calculations, showing raw values, utility conversions, and final Borda points.
 
-## System Requirements
+#### System Requirements
 
 *   Docker & Docker Compose
 *   Node.js & NPM (for frontend asset compilation)
 
-## Installation Guide
+#### Installation Guide
 
 Follow these steps to deploy the application with a fully seeded database.
 
-### 1. Application Setup
+##### 1. Application Setup
 
 Clone the repository and navigate to the project directory.
 
@@ -42,42 +42,42 @@ Clone the repository and navigate to the project directory.
 cp .env.example .env
 ```
 
-Ensure your `.env` file is configured for the Docker environment (default settings usually suffice for local development using the provided `docker-compose.yml`).
+Ensure your `.env` file is configured for the Docker environment (default settings usually suffice for local development using the provided `docker compose.yml`).
 
-### 2. Infrastructure Initialization
+##### 2. Infrastructure Initialization
 
 Start the containerized services (App, Web Server, Database).
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
-### 3. Dependency Installation
+##### 3. Dependency Installation
 
 Install backend (PHP/Composer) and frontend (Node/NPM) dependencies.
 
 ```bash
 # Install PHP dependencies
-docker-compose exec app composer install
+docker compose exec app composer install
 
 # Install Node dependencies
 npm install
 ```
 
-### 4. Database Configuration
+##### 4. Database Configuration
 
 Generate the application key and initialize the database. This step includes running migrations and seeding the database with required reference data and sample users.
 
 ```bash
 # Generate App Key
-docker-compose exec app php artisan key:generate
+docker compose exec app php artisan key:generate
 
 # Migrate and Seed Database
 # This creates all tables and populates them with default admin/appraiser accounts and sample participants.
-docker-compose exec app php artisan migrate:fresh --seed
+docker compose exec app php artisan migrate:fresh --seed
 ```
 
-### 5. Frontend Compilation
+##### 5. Frontend Compilation
 
 Start the Vite development server to compile and serve frontend assets.
 
@@ -85,7 +85,7 @@ Start the Vite development server to compile and serve frontend assets.
 npm run dev
 ```
 
-### 6. Accessing the System
+##### 6. Accessing the System
 
 The application is now accessible at: **http://localhost:8000**
 
