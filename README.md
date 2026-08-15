@@ -6,11 +6,11 @@ This web-based Group Decision Support System (GDSS) is designed to streamline an
 
 #### Screenshots
 
-![Dashboard](docs/dashboard.png)
-![Assessment form](docs/assessment.png)
-![Criteria configuration](docs/criteria.png)
-![Borda reports](docs/reports.png)
-![Final decision](docs/final-decision.png)
+![Dashboard](assets/dashboard.png)
+![Assessment form](assets/assessment.png)
+![Criteria configuration](assets/criteria.png)
+![Borda reports](assets/reports.png)
+![Final decision](assets/final-decision.png)
 
 #### Core Features & Processes
 
