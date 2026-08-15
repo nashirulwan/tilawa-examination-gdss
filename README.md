@@ -6,6 +6,8 @@ This web-based Group Decision Support System (GDSS) is designed to streamline an
 
 #### Screenshots
 
+![Login](assets/login.png)
+
 ![Dashboard](assets/dashboard.png)
 
 | Rate participants | Assessment form |
