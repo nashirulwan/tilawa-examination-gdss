@@ -7,20 +7,24 @@ This web-based Group Decision Support System (GDSS) is designed to streamline an
 #### Screenshots
 
 ![Login](assets/login.png)
+*Login page*
 
 ![Dashboard](assets/dashboard.png)
+*Dashboard*
 
 | Rate participants | Assessment form |
 |---|---|
 | ![Rate list](assets/rate_appraiser.png) | ![Assessment form](assets/assessment.png) |
 
 ![Criteria configuration](assets/criteria.png)
+*Criteria configuration*
 
 | Reports | Report detail |
 |---|---|
 | ![Reports](assets/reports.png) | ![Report detail](assets/reports2.png) |
 
 ![Final decision](assets/final-decision.png)
+*Final decision*
 
 #### Core Features & Processes
 
