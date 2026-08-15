@@ -4,6 +4,14 @@
 
 This web-based Group Decision Support System (GDSS) is designed to streamline and objectify the evaluation process involved in Quran Recitation Competitions (Musabaqah Tilawatil Quran). By integrating the **SMART** (Simple Multi-Attribute Rating Technique) method for individual assessment and the **Borda Count** method for group consensus, the system ensures fair, transparent, and mathematically rigorous rankings. Built for an information systems course.
 
+#### Screenshots
+
+![Dashboard](docs/dashboard.png)
+![Assessment form](docs/assessment.png)
+![Criteria configuration](docs/criteria.png)
+![Borda reports](docs/reports.png)
+![Final decision](docs/final-decision.png)
+
 #### Core Features & Processes
 
 The system facilitates the entire competition lifecycle through the following key processes:
@@ -92,9 +100,8 @@ The application is now accessible at: **http://localhost:8000**
 
 **Default Credentials:**
 
-*   **Committee (Admin)**
-    *   Email: `admin@example.com`
-    *   Password: `password`
-*   **Appraiser (Judge)**
-    *   Email: `appraiser@example.com`
-    *   Password: `password`
+| Role | Email | Password |
+|---|---|---|
+| Committee (Admin) | `admin@mtq.com` | `password` |
+| Appraiser | `appraiser1@mtq.com` | `password` |
+| Jury Chair | `jury@mtq.com` | `password` |
